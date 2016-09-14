@@ -4,14 +4,12 @@
 
 //List of registered devices
 var listDevices = [
-    {id:"1",type:"android",status:"unblock",target:"macMini01"},
-    {id:"2",type:"android",status:"unblock",target:"macMini01"},
-    {id:"3",type:"android",status:"unblock",target:"macMini01"},
-    {id:"4",type:"ios",status:"unblock",target:"macMini01"},
-    {id:"5",type:"android",status:"unblock",target:"laptop01"},
-    {id:"6",type:"android",status:"unblock",target:"laptop01"},
-    {id:"7",type:"android",status:"unblock",target:"laptop01"},
-    {id:"8",type:"android",status:"unblock",target:"laptop01"}];
+    {id:"1",type:"android",status:"unblock",target:"macMini01", runId:""},
+    {id:"4",type:"ios",status:"unblock",target:"macMini01", runId:""},
+    {id:"5",type:"android",status:"unblock",target:"laptop01", runId:""},
+    {id:"8",type:"android",status:"unblock",target:"laptop01", runId:""}];
+
+exports.listDevices = function () {return listDevices};
 
 /** 
  * Search for an available devices
@@ -36,12 +34,27 @@ exports.searchAvailableDevice = function (platform) {
 /**
  *Block a given device 
  */
-exports.blockDevice = function(device){
+exports.blockDevice = function(device, runId){
     console.log("Blocking device " + device.id);
     listDevices.forEach(function(value){
         if (value.id == device.id){
-            value.status="blocked"
+            value.status="blocked";
+            value.runId=runId;
             console.log("Device blocked");
+        }
+    });
+}
+
+/**
+ *Block a given device 
+ */
+exports.releaseDevice = function(deviceId){
+    console.log("Releasing the device " + deviceId);
+    listDevices.forEach(function(value){
+        if (value.id == deviceId){
+            value.status="unblock";
+            value.runId="";
+            console.log("Device " + deviceId + " unblock");
         }
     });
 }

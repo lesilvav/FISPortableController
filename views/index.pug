@@ -2,4 +2,10 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  h2 List of Target Devices 
+  ul
+    each device, d in devices
+      l
+        p ID: #{device.id} / Type: #{device.type} / Status: #{device.status} / Target: #{device.target} / RunID: #{device.runId}}
+
+
