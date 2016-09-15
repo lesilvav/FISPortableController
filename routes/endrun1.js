@@ -10,12 +10,13 @@ router.get('/', function(req, res, next) {
   var deviceId = req.query.deviceid;
   var resMsg = "";
   
-  console.log("release de device: " + deviceId);
+  Console.log("release de device: " + deviceId);
   if (typeof deviceId !== 'undefined') {
-    console.log("release de device");
+    Console.log("release de device");
     resources.releaseDevice(deviceId);
   }
-  next();
+  //next();
+  res.send();
 },function(req, res) {
   var device = resources.searchById(req.query.deviceid);
   var run = {platform:device.platform};

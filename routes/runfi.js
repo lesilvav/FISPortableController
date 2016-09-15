@@ -1,6 +1,7 @@
 var express = require('express');
-var http = require('http');
-var resources = require('../controllers/resources')
+var resources = require('../controllers/resources');
+var runList = require('../controllers/runlist');
+var target = require('../controllers/target');
 var router = express.Router();
 
 
@@ -14,24 +15,14 @@ router.get('/', function(req, res, next) {
   if (typeof availableDevice !== 'undefined') {
     //block de device
     resources.blockDevice(availableDevice, runId);
-    resources.printDevices();
-    
     //Run Portable Suite on target
-    http.get({hostname: 'localhost',port: 3001,
-        path: '/runfi?deviceid=' + availableDevice.id,
-        agent: false}, 
-        (res) => {
-            console.log(res.statusMessage);
-        }
-    );
+    target.runDeviceOnTarget(availableDevice.id);
+  } else {
+    //Queue the run until a device is available
+    var run = {id:runId, platform:platform};
+    runList.addRun(run);
   }
- 
   res.send(availableDevice);
-});
-
-/* POST run FI*/
-router.post('/', function(req, res, next) {
-  res.send('POST runID: ' + req.param('runID'));
 });
 
 module.exports = router;

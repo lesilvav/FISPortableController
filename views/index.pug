@@ -6,6 +6,11 @@ block content
   ul
     each device, d in devices
       l
-        p ID: #{device.id} / Type: #{device.type} / Status: #{device.status} / Target: #{device.target} / RunID: #{device.runId}}
+        p Device ID: #{device.id} / Type: #{device.type} / Status: #{device.status} / Target: #{device.target} / RunID: #{device.runId}
 
+  h2 Queue Run 
+  ul
+    each run, d in runOnList
+      l
+        p Run ID: #{run.id} / Platform: #{run.platform}
 

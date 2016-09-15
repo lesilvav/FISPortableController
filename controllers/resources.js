@@ -2,7 +2,7 @@
  * Module to manage the registered devices.
  */
 
-//List of registered devices
+//List of registered resources
 var listDevices = [
     {id:"1",type:"android",status:"unblock",target:"macMini01", runId:""},
     {id:"4",type:"ios",status:"unblock",target:"macMini01", runId:""},
@@ -10,6 +10,21 @@ var listDevices = [
     {id:"8",type:"android",status:"unblock",target:"laptop01", runId:""}];
 
 exports.listDevices = function () {return listDevices};
+
+/**
+ * Search a Device by its Id
+ */
+exports.searchById = function (deviceId){
+    var retDevice;
+    listDevices.some(function(value,index){
+        if (value.deviceId == deviceId){
+            retDevice = listDevices[index];
+            return true;
+        }
+    });
+
+    return retDevice;
+};
 
 /** 
  * Search for an available devices
