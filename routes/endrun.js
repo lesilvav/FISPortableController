@@ -17,20 +17,27 @@ router.get('/', function(req, res, next) {
   }
   next();
 },function(req, res) {
+  console.log("Verify if there is any Run waiting on the queue")
   var device = resources.searchById(req.query.deviceid);
-  var run = {platform:device.platform};
+  console.log("Device recently released platform: " + device.type)
+  var run = {platform:device.type};
+  console.log("Initial Run platform: " + run.platform)
   run = runList.searchRun(run);
-  if (run !== 'undefined') {
-    var availableDevice = resources.searchAvailableDevice(platform); 
-    if (typeof availableDevice !== 'undefined') {
-      //block de device
+  console.log("Run on the queue: " + run)
+  if ( run != null) {
+    console.log("A Run was found in the queue. Start searching for an available device");
+    var availableDevice = resources.searchAvailableDevice(run.platform); 
+    if ( availableDevice != null) {
+      console.log("Device was found. Will be block");
       resources.blockDevice(availableDevice, run.id);
-      //run the target
-      target.runDeviceOnTarget(availableDevice.deviceId);  
+      console.log("run the target");
+      target.runDeviceOnTarget(availableDevice);  
     } else {
-      //Queue the run until a device is available
+      console.log("Queue the run until a device is available");
       runList.addRun(run);
     };
+  }else{
+    console.log("There is no Run in the queue");
   };
   res.send();
 });

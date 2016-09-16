@@ -9,8 +9,11 @@ block content
         p Device ID: #{device.id} / Type: #{device.type} / Status: #{device.status} / Target: #{device.target} / RunID: #{device.runId}
 
   h2 Queue Run 
-  ul
-    each run, d in runOnList
-      l
-        p Run ID: #{run.id} / Platform: #{run.platform}
+  if runOnList.length==0
+    p Queue is empty.
+  else
+    ul
+      each run, d in runOnList
+        l
+          p Run ID: #{run.id} / Platform: #{run.platform}
 

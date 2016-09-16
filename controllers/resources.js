@@ -4,10 +4,10 @@
 
 //List of registered resources
 var listDevices = [
-    {id:"1",type:"android",status:"unblock",target:"macMini01", runId:""},
-    {id:"4",type:"ios",status:"unblock",target:"macMini01", runId:""},
-    {id:"5",type:"android",status:"unblock",target:"laptop01", runId:""},
-    {id:"8",type:"android",status:"unblock",target:"laptop01", runId:""}];
+    {id:"20",type:"android",status:"unblock",target:"192.168.1.223", runId:""},
+    {id:"21",type:"ios",status:"unblock",target:"192.168.1.223", runId:""},
+    {id:"22",type:"android",status:"unblock",target:"192.168.0.249", runId:""},
+    {id:"23",type:"ios",status:"unblock",target:"192.168.0.249", runId:""}];
 
 exports.listDevices = function () {return listDevices};
 
@@ -15,14 +15,19 @@ exports.listDevices = function () {return listDevices};
  * Search a Device by its Id
  */
 exports.searchById = function (deviceId){
+    console.log("searching device by id: " + deviceId);
     var retDevice;
+    console.log("initial return device: " + retDevice);
     listDevices.some(function(value,index){
-        if (value.deviceId == deviceId){
+        console.log("inside some. value: " + value + " index: " + index);
+        if (value.id == deviceId){
+            console.log("fund device: " + value + " on index: " + index);
             retDevice = listDevices[index];
+            console.log("return device: " + value);
             return true;
         }
     });
-
+    console.log("final return device: " + retDevice);
     return retDevice;
 };
 

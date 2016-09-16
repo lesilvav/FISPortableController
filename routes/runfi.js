@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
     //block de device
     resources.blockDevice(availableDevice, runId);
     //Run Portable Suite on target
-    target.runDeviceOnTarget(availableDevice.id);
+    target.runDeviceOnTarget(availableDevice);
   } else {
     //Queue the run until a device is available
     var run = {id:runId, platform:platform};

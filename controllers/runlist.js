@@ -3,7 +3,7 @@
  */
 
 //List of Runs
-var runList = [{id:"1",platform:"android"}];
+var runList = [];
 
 exports.runList = function () {return runList};
 
@@ -20,14 +20,14 @@ exports.addRun = function (run) {
  *platform 
  */
 exports.searchRun = function(run){
-    console.log("searching a run for platform: " + platform);
+    console.log("searching a run for platform: " + run.platform);
     var retRun;
     runList.some(function(value,index,array){
         if (value.platform == run.platform){
             //Set return Run object
             retRun = value;
             //Remove the Run from the List.
-            runList.splice(index);
+            runList.splice(index,1);
             //exit from the loop 
             return true;
         }

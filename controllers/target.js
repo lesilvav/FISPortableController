@@ -3,10 +3,10 @@
  */
 var http = require('http');
 
-exports.runDeviceOnTarget = function (deviceId) {
+exports.runDeviceOnTarget = function (device) {
     console.log("Run Portable Suite on target");
-    http.get({hostname: 'localhost',port: 3001,
-        path: '/runfi?deviceid=' + deviceId,
+    http.get({hostname: device.target,port: 3001,
+        path: '/runfi?deviceid=' + device.id + '&runid=' + device.runId,
         agent: false}, 
         (res) => {
             console.log(res.statusMessage);
