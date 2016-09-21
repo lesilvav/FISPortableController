@@ -8,6 +8,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var runfi = require('./routes/runfi');
 var endrun = require('./routes/endrun');
+var resources = require('./routes/resources');
 
 var app = express();
 
@@ -23,10 +24,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
-app.use('/runfi', runfi);
-app.use('/endrun', endrun)
+//To Remove: app.use('/', routes);
+app.use('/api/runfi', runfi);
+app.use('/api/endrun', endrun)
+app.use('/api/resources', resources)
+
+app.get('*', function(req, res) {
+  res.sendFile('./public/index.html'); // load the single view file
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
