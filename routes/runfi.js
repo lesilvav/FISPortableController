@@ -7,8 +7,9 @@ var router = express.Router();
 
 /* GET run FI*/
 router.get('/', function(req, res, next) {
-  var platform = req.query.platform;
-  var runId = req.query.runid;
+  console.log("Request params:" + req.query);
+  var platform = req.query.PLATFORMTORUN;
+  var runId = req.query.RUNID;
 
   //Search for an available device
   var availableDevice = resources.searchAvailableDevice(platform); 
@@ -16,7 +17,7 @@ router.get('/', function(req, res, next) {
     //block de device
     resources.blockDevice(availableDevice, runId);
     //Run Portable Suite on target
-    target.runDeviceOnTarget(availableDevice);
+    target.runDeviceOnTarget(availableDevice, req);
   } else {
     //Queue the run until a device is available
     var run = {id:runId, platform:platform};
