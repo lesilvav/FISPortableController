@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
-var users = require('./routes/users');
 var runfi = require('./routes/runfi');
 var endrun = require('./routes/endrun');
 var resources = require('./routes/resources');
@@ -24,7 +23,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//To Remove: app.use('/', routes);
 app.use('/api/runfi', runfi);
 app.use('/api/endrun', endrun)
 app.use('/api/resources', resources)
