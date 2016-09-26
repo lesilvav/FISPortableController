@@ -9,7 +9,6 @@ var users = require('./routes/users');
 var runfi = require('./routes/runfi');
 var endrun = require('./routes/endrun');
 var resources = require('./routes/resources');
-
 var app = express();
 
 // view engine setup
@@ -63,6 +62,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;

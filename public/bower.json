@@ -1,0 +1,19 @@
+{
+  "name": "FISPortableController",
+  "homepage": "https://github.com/lesilvav/FISPortableController",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "angular": "1.5.8",
+    "jquery": "^3.1.1"
+  }
+}

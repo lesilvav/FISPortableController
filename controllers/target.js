@@ -1,6 +1,7 @@
 /**
  * Module to allow some target operations.
  */
+var socket = require('../sockets/base.js');
 var http = require('http');
 
 exports.runDeviceOnTarget = function (device) {
@@ -11,5 +12,5 @@ exports.runDeviceOnTarget = function (device) {
         (res) => {
             console.log(res.statusMessage);
         }
-    ); 
+    );
 };

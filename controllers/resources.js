@@ -1,6 +1,7 @@
 /**
  * Module to manage the registered devices.
  */
+var socket = require('../sockets/base.js');
 
 //List of registered resources
 var listDevices = [
@@ -60,7 +61,8 @@ exports.blockDevice = function(device, runId){
         if (value.id == device.id){
             value.status="blocked";
             value.runId=runId;
-            console.log("Device blocked");
+            console.log("Device " + value.id + " was blocked in the server");
+            socket.updateDevice(value);
         }
     });
 }
@@ -74,7 +76,8 @@ exports.releaseDevice = function(deviceId){
         if (value.id == deviceId){
             value.status="unblock";
             value.runId="";
-            console.log("Device " + deviceId + " unblock");
+            console.log("Device " + deviceId + " unblock in the server");
+            socket.updateDevice(value); 
         }
     });
 }

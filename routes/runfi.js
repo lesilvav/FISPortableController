@@ -4,7 +4,6 @@ var runList = require('../controllers/runlist');
 var target = require('../controllers/target');
 var router = express.Router();
 
-
 /* GET run FI*/
 router.get('/', function(req, res, next) {
   var platform = req.query.platform;
