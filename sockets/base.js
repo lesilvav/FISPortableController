@@ -1,3 +1,5 @@
+//TODO: Use broadcast instead of emit.
+
 var socketio = '';
 
 /**
