@@ -5,11 +5,15 @@ var socket = require('../sockets/base.js');
 
 //List of registered resources
 var listDevices = [
-    {id:"20",type:"android",status:"unblock",target:"localhost", runId:""},
-    {id:"21",type:"ios",status:"unblock",target:"localhost", runId:""},
-    {id:"22",type:"android",status:"unblock",target:"localhost", runId:""},
-    {id:"23",type:"ios",status:"unblock",target:"localhost", runId:""}];
+    {id:"20",type:"android",status:"unblock",target:"192.168.1.223", runId:""},
+    {id:"21",type:"ios",status:"unblock",target:"192.168.1.223", runId:""}];
+   
+//    {id:"22",type:"android",status:"unblock",target:"192.168.0.249", runId:""},
+//    {id:"23",type:"ios",status:"unblock",target:"192.168.0.249", runId:""}
 
+/**
+ * Returns the list of devices
+ */
 exports.listDevices = function () {return listDevices};
 
 /**
