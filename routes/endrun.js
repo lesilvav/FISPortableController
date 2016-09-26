@@ -18,22 +18,23 @@ router.get('/', function(req, res, next) {
   next();
 },function(req, res) {
   console.log("Verify if there is any Run waiting on the queue")
+  //TODO: it comes from a TARGET request. Verify if it requires to be synchronized
+  //to avoid a lock when at the same time the QA Tools Portal request a run.
   var device = resources.searchById(req.query.deviceid);
+
   console.log("Device recently released platform: " + device.type)
-  var run = {platform:device.type};
-  console.log("Initial Run platform: " + run.platform)
+  var run = {platformToRun:device.type};
+  
+  console.log("Initial Run platform: " + run.platformToRun)
   run = runList.searchRun(run);
-  console.log("Run on the queue: " + run)
+  
   if ( run != null) {
-    console.log("A Run was found in the queue. Start searching for an available device");
-    var availableDevice = resources.searchAvailableDevice(run.platform); 
+    console.log("Run on the queue: " + run)
+    var availableDevice = resources.searchAvailableDevice(run.platformToRun); 
     if ( availableDevice != null) {
-      console.log("Device was found. Will be block");
-      resources.blockDevice(availableDevice, run.id);
-      console.log("run the target");
+      resources.blockDevice(availableDevice, run);
       target.runDeviceOnTarget(availableDevice);  
     } else {
-      console.log("Queue the run until a device is available");
       runList.addRun(run);
     };
   }else{

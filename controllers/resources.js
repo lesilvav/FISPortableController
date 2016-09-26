@@ -59,12 +59,12 @@ exports.searchAvailableDevice = function (platform) {
 /**
  *Block a given device 
  */
-exports.blockDevice = function(device, runId){
+exports.blockDevice = function(device, run){
     console.log("Blocking device " + device.id);
     listDevices.forEach(function(value){
         if (value.id == device.id){
             value.status="blocked";
-            value.runId=runId;
+            value.runId=run.id;
             console.log("Device " + value.id + " was blocked in the server");
             socket.updateDevice(value);
         }

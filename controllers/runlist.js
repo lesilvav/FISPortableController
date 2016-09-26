@@ -20,10 +20,10 @@ exports.addRun = function (run) {
  *platform 
  */
 exports.searchRun = function(run){
-    console.log("searching a run for platform: " + run.platform);
+    console.log("searching a run for platform: " + run.platformToRun);
     var retRun;
     runList.some(function(value,index,array){
-        if (value.platform == run.platform){
+        if (value.platformToRun == run.platformToRun){
             //Set return Run object
             retRun = value;
             //Remove the Run from the List.

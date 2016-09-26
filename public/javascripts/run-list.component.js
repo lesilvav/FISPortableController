@@ -3,7 +3,7 @@ component('runList',{
     template: `<p>Length:{{ctrl.queue.length}}</p>
                 <div ng-repeat="run in ctrl.queue">
                     <label>
-                        Run ID: {{run.id}} / Platform: {{run.platform}}
+                        Run ID: {{run.id}} / Platform: {{run.platformToRun}}
                     </label>
                 </div>`,
     controllerAs: 'ctrl',
