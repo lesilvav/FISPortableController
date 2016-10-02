@@ -1,3 +1,5 @@
+//TODO: Use broadcast instead of emit.
+
 var socketio = '';
 
 /**
@@ -13,7 +15,7 @@ exports.setIo = function(io){
 exports.socketio = function(){return socketio};
 
 /**
- * Send an update status of a Device.
+ * Update status of a Device.
  */
 exports.updateDevice = function(device){
     socketio.emit('update-device',{
@@ -21,4 +23,20 @@ exports.updateDevice = function(device){
         status: device.status,
         runId: device.runId
     });
+}
+
+//TODO: Don't send complete Run object to client because it could containt sensible
+//data
+/**
+ * Add a Run in the Queue.
+ */
+exports.addRunQueue = function(run){
+    socketio.emit('add-run-queue',{run});
+}
+
+/**
+ * Remove a Run from the Queue.
+ */
+exports.removeRunQueue = function(run){
+    socketio.emit('remove-run-queue',{run});
 }

@@ -5,8 +5,8 @@ var socket = require('../sockets/base.js');
 
 //List of registered resources
 var listDevices = [
-    {id:"20",type:"android",status:"unblock",target:"192.168.1.223", runId:""},
-    {id:"21",type:"ios",status:"unblock",target:"192.168.1.223", runId:""}];
+    {id:"20",type:"android",status:"unblock",target:"192.168.1.223", runId:"", run:""},
+    {id:"21",type:"ios",status:"unblock",target:"192.168.1.223", runId:"", run:""}];
    
 //    {id:"22",type:"android",status:"unblock",target:"192.168.0.249", runId:""},
 //    {id:"23",type:"ios",status:"unblock",target:"192.168.0.249", runId:""}
@@ -59,12 +59,13 @@ exports.searchAvailableDevice = function (platform) {
 /**
  *Block a given device 
  */
-exports.blockDevice = function(device, runId){
+exports.blockDevice = function(device, run){
     console.log("Blocking device " + device.id);
     listDevices.forEach(function(value){
         if (value.id == device.id){
-            value.status="blocked";
-            value.runId=runId;
+            value.status = "blocked";
+            value.runId = run.id;
+            value.run = run;
             console.log("Device " + value.id + " was blocked in the server");
             socket.updateDevice(value);
         }
@@ -78,8 +79,9 @@ exports.releaseDevice = function(deviceId){
     console.log("Releasing the device " + deviceId);
     listDevices.forEach(function(value){
         if (value.id == deviceId){
-            value.status="unblock";
-            value.runId="";
+            value.status = "unblock";
+            value.runId = "";
+            value.run = "";
             console.log("Device " + deviceId + " unblock in the server");
             socket.updateDevice(value); 
         }

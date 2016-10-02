@@ -3,11 +3,11 @@ component('runList',{
     template: `<p>Length:{{ctrl.queue.length}}</p>
                 <md-list-item ng-repeat="run in ctrl.queue">
                     <label>
-                        Run ID: {{run.id}} / Platform: {{run.platform}}
+                        Run ID: {{run.id}} / Platform: {{run.platformToRun}}
                     </label>
                 </md-list-item>`,
     controllerAs: 'ctrl',
-    controller: function RunListController($scope, $http) {
+    controller: function RunListController($scope, $http, socket) {
         // when landing on the page, we display the Queue.
         $http.get('/api/resources/runlist')
             .success(function(data) {
@@ -17,5 +17,18 @@ component('runList',{
             .error(function(data) {
                 console.log('Error: ' + data);
             });
+        socket.on('add-run-queue', function (data) {
+            $scope.ctrl.queue.push(data.run);
+        });
+        socket.on('remove-run-queue', function (data) {
+            $scope.ctrl.queue.some(function(value,index,array){
+                if (value.id == data.run.id){
+                    //Remove the Run from the Queue.
+                    $scope.ctrl.queue.splice(index,1);
+                    //exit from the loop 
+                    return true;
+                }
+            });
+        });     
     } 
 });

@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
   var availableDevice = resources.searchAvailableDevice(run.platformToRun); 
   if (typeof availableDevice !== 'undefined') {
     //block de device
-    resources.blockDevice(availableDevice, run.id);
+    resources.blockDevice(availableDevice, run);
     //Run Portable Suite on target
     target.runDeviceOnTarget(availableDevice, req);
   } else {

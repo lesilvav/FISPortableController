@@ -2,6 +2,8 @@
  * Module to manage the list of Runs waiting for a device.
  */
 
+var socket = require('../sockets/base.js');
+
 //List of Runs
 var runList = [];
 
@@ -13,6 +15,7 @@ exports.runList = function () {return runList};
 exports.addRun = function (run) {
     console.log("One item added to the run list: " + run);
     runList.push(run);
+    socket.addRunQueue(run);
 }
 
 /**
@@ -20,14 +23,16 @@ exports.addRun = function (run) {
  *platform 
  */
 exports.searchRun = function(run){
-    console.log("searching a run for platform: " + run.platform);
+    console.log("searching a run for platform: " + run.platformToRun);
     var retRun;
     runList.some(function(value,index,array){
-        if (value.platform == run.platform){
+        if (value.platformToRun == run.platformToRun){
             //Set return Run object
             retRun = value;
             //Remove the Run from the List.
             runList.splice(index,1);
+            //Update Clients
+            socket.removeRunQueue(retRun);
             //exit from the loop 
             return true;
         }
