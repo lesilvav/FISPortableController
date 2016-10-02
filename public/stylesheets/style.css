@@ -6,3 +6,7 @@ body {
 a {
   color: #00B7FF;
 }
+
+.listdemoBasicUsage md-divider {
+  margin-top: 10px;
+  margin-bottom: 0; }

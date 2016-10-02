@@ -1,11 +1,11 @@
-angular.module('mainCtrlSrv').
+angular.module('starterApp').
 component('runList',{
     template: `<p>Length:{{ctrl.queue.length}}</p>
-                <div ng-repeat="run in ctrl.queue">
+                <md-list-item ng-repeat="run in ctrl.queue">
                     <label>
                         Run ID: {{run.id}} / Platform: {{run.platform}}
                     </label>
-                </div>`,
+                </md-list-item>`,
     controllerAs: 'ctrl',
     controller: function RunListController($scope, $http) {
         // when landing on the page, we display the Queue.

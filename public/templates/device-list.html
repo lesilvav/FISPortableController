@@ -1,0 +1,28 @@
+<div layout-gt-sm="row" layout="column" class="listdemoBasicUsage">
+
+    <div flex-gt-sm="50" flex="">
+
+        <md-toolbar layout="row" class="md-hue-3">
+            <div class="md-toolbar-tools">
+                <span>List of devices</span>
+            </div>
+        </md-toolbar>
+
+        <md-content>
+            <md-list flex="">
+                <md-list-item class="md-3-line" ng-repeat="device in ctrl.devices" ng-click="null">
+                <!--TODO: use image set instead -->
+                <img ng-if="device.type=='android'" ng-src="../images/64px-Android_dance.png" class="md-avatar" alt="alt for device">
+                <img ng-if="device.type=='ios'" ng-src="../images/Apple_Logo.svg" class="md-avatar" alt="alt for device">
+                <div class="md-list-item-text" layout="column">
+                    <h3>ID: {{device.id}}</h3>
+                    <h4>target: {{device.target}}</h4>
+                    <h4>Status: {{device.status}}</h4>
+                </div>
+            </md-list-item>
+        </md-content>
+    </div>
+
+    <md-divider></md-divider>
+
+</div>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Angular Material - Starter App</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+
+    <style type="text/css">
+        /**
+         * Hide when Angular is not yet loaded and initialized
+         */
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+          display: none !important;
+        }
+    </style>
+
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/angular/angular.js"></script>
+    <script src="./bower_components/angular-animate/angular-animate.js"></script>
+    <script src="./bower_components/angular-aria/angular-aria.js"></script>
+    <script src="./bower_components/angular-material/angular-material.js"></script>    
+    <script src="/socket.io/socket.io.js"></script><!-- load socket io -->
+
+  </head>
+
+  <body layout="column" ng-cloak ng-app="starterApp" ng-controller="AppCtrl">
+
+    <md-toolbar layout="row">
+      <h1>FIS - RIG Controller</h1>
+    </md-toolbar>
+
+    <div flex layout="row">
+
+        <md-sidenav  md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2" >
+            <md-list>
+                <md-list-item ng-repeat="it in items">
+                    <md-button ng-click="selectItem(it)" ng-class="{'selected' : it === selected }">
+                        <md-icon md-svg-icon="{{it.icon}}" class="avatar"></md-icon>
+                        {{it.name}}
+                    </md-button>
+                </md-list-item>
+            </md-list>
+        </md-sidenav>
+
+        <md-content flex id="content">
+            <div ng-if="selected.id=='fi'">
+                <h2>Runs in the RIG</h2>
+                <span>List of FIs in the RIG and waiting for device</span>
+            </div>
+            <div ng-if="selected.id=='dv'">
+                <device-list></device-list>
+            </div>
+            <div ng-if="selected.id=='st'">
+                <h2>Settings</h2>
+                <span>Configure theme</span>
+            </div>
+        </md-content>
+
+    </div>
+    <script src="/javascripts/app.js"></script>
+    <script src="/javascripts/socketio.service.js"></script>
+    <script src="/javascripts/device-list.component.js"></script>
+    <script src="/javascripts/nav-items.component.js"></script>
+    <script src="/javascripts/nav-items.service.js"></script>
+    <script src="/javascripts/app.controller.js"></script>
+  </body>
+    
+</html>

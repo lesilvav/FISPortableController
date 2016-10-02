@@ -1,4 +1,4 @@
-angular.module('mainCtrlSrv', []).
+angular.module('starterApp').
 factory('socket', function ($rootScope) {
   var socket = io.connect();
   return {
